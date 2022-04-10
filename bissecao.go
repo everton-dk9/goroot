@@ -4,10 +4,7 @@ import (
 	"fmt"
 )
 
-// O metodo da bissecao retorna a raiz aproximada de f que se encontra entre o
-// intervalo de a ate b utilizando uma precisao aceitavel. Se o numero maximo de
-// iteracoes for atingido o metodo retorna
-// func Bissecao(f fn, a, b float64, e1 float64, iteracoes int, print bool) float64 {
+// input: f, [a,b], precision
 func Bissecao(mb *MethodBase) float64 {
 
 	a := mb.a

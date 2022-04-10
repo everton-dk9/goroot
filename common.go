@@ -25,13 +25,17 @@ type MethodBase struct {
 	a, b      float64
 	e1, e2    float64
 	x0, x1    float64
-	Printable bool
+	printable bool
 	printer   printer
 	w         io.Writer
 }
 
+func (mb *MethodBase) isPrintable() bool {
+	return mb.printable
+}
+
 func (mb *MethodBase) Print(args ...interface{}) {
-	if mb.Printable {
+	if mb.isPrintable() {
 		mb.printer(mb.w, args...)
 	}
 }
@@ -57,7 +61,7 @@ func NewMethod(opts ...MethodOption) *MethodBase {
 		g:         defaultG,
 		e1:        defaultPrec,
 		e2:        defaultPrec,
-		Printable: defaultPrintable,
+		printable: defaultPrintable,
 		printer:   defaultPrinter,
 		k:         defaultIterationsLimit,
 		w:         defaultWriter,
@@ -73,33 +77,59 @@ func (mb *MethodBase) GetWriter() io.Writer {
 	return mb.w
 }
 
-func WithFunctions(f, h fn) MethodOption {
+func WithFunctions(f, g fn) MethodOption {
 	return func(m *MethodBase) {
-		m.f, m.g = f, h
+		if f != nil {
+			m.f = f
+		}
+
+		if g != nil {
+			m.g = g
+		}
 	}
 }
 
 func WithInterval(a, b float64) MethodOption {
 	return func(m *MethodBase) {
-		m.a, m.b = a, b
+		if a >= 0 {
+			m.a = a
+		}
+
+		if b >= 0 {
+			m.b = b
+		}
 	}
 }
 
 func WithInitialValues(x0, x1 float64) MethodOption {
 	return func(m *MethodBase) {
-		m.x0, m.x1 = x0, x1
+		if x0 >= 0 {
+			m.x0 = x0
+		}
+
+		if x1 >= 0 {
+			m.x1 = x1
+		}
 	}
 }
 
 func WithPrecision(e1, e2 float64) MethodOption {
 	return func(m *MethodBase) {
-		m.e1, m.e2 = e1, e2
+		if e1 >= 0 {
+			m.e1 = e1
+		}
+
+		if e2 >= 0 {
+			m.e2 = e2
+		}
 	}
 }
 
 func WithIterationsLimit(k int) MethodOption {
 	return func(m *MethodBase) {
-		m.k = k
+		if k >= 0 {
+			m.k = k
+		}
 	}
 }
 
@@ -113,6 +143,6 @@ func WithPrint(wr io.Writer, p printer) MethodOption {
 		if wr != nil {
 			m.w = wr
 		}
-		m.Printable = true
+		m.printable = true
 	}
 }

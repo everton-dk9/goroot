@@ -4,17 +4,7 @@ import (
 	"math"
 )
 
-// metodo numerico da secante:
-//
-// entradas:
-// 	- função f
-// 	- entradas iniciais x0 e x1
-// 	- precisões e1, e2
-// 	- qtd de iterações k
-//
-// saida:
-// 	- raiz aproximada de f
-//
+// input: f(x), initialValueX0, initialValueX1 precision1, precision2
 func Secante(mb *MethodBase) float64 {
 	f := mb.f
 	x0 := mb.x0

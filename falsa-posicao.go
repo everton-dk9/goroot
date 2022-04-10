@@ -5,6 +5,7 @@ import (
 	"math"
 )
 
+// input: f(x),[a,b], precision
 func FalsaPosicao(mb *MethodBase) float64 {
 	var root float64
 

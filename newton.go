@@ -4,18 +4,7 @@ import (
 	"math"
 )
 
-// metodo numerico de Newton-Rhapson:
-//
-// entradas:
-// 	- função f
-// 	- derivada de f
-// 	- valor inicial x0
-// 	- precisões e1, e2
-// 	- qtd de iterações k
-//
-// saida:
-// 	- raiz aproximada de f
-//
+// input: f(x), dF(x), initialValue, precision1, precision2
 func Newton(mb *MethodBase) float64 {
 	f := mb.f
 	x0 := mb.x0
