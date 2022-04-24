@@ -30,12 +30,12 @@ type MethodBase struct {
 	w         io.Writer
 }
 
-func (mb *MethodBase) isPrintable() bool {
+func (mb *MethodBase) IsPrintable() bool {
 	return mb.printable
 }
 
 func (mb *MethodBase) Print(args ...interface{}) {
-	if mb.isPrintable() {
+	if mb.IsPrintable() {
 		mb.printer(mb.w, args...)
 	}
 }
