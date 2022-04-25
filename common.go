@@ -91,13 +91,13 @@ func WithFunctions(f, g fn) MethodOption {
 
 func WithInterval(a, b float64) MethodOption {
 	return func(m *MethodBase) {
-		if a >= 0 {
-			m.a = a
-		}
+		// if a >= 0 {
+		// }
 
-		if b >= 0 {
-			m.b = b
-		}
+		// if b >= 0 {
+		// 	m.b = b
+		// }
+		m.a, m.b = a, b
 	}
 }
 
